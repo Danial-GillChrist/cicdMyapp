@@ -1,21 +1,10 @@
-FROM node:20 AS builder
+FROM node:20
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
 COPY . .
+RUN npm install
 RUN npm run build
 
-FROM nginx:alpine
+EXPOSE 5173
 
-# Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy custom config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["sh", "-c", "nginx -g 'daemon off;'"]
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
