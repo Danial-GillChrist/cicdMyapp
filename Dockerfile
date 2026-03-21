@@ -1,10 +1,17 @@
 FROM node:20
 
 WORKDIR /app
-COPY . .
+
+COPY package*.json ./
 RUN npm install
+
+COPY . .
+
 RUN npm run build
 
-EXPOSE 5173
+# Railway gives PORT automatically
+ENV PORT=3000
 
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
+EXPOSE 3000
+
+CMD ["sh", "-c", "npx serve -s dist -l $PORT"]
