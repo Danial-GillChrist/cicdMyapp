@@ -32,7 +32,7 @@ function App() {
 
   return (
     <>
-       <h1>Teting User</h1>
+       <h1>Teting User User</h1>
        {
         user?.map((item)=>{
           let {firstName, lastName, id} = item;
