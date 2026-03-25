@@ -29,6 +29,8 @@ function App() {
 
   return (
     <>
+      <h1>Heading</h1>
+      <h1>Heading 2</h1>
       {user?.map((item) => {
         let { firstName, lastName, id } = item;
         return (
